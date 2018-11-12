@@ -1,0 +1,9 @@
+#!/bin/bash
+
+ROOT=`git rev-parse --show-toplevel`
+
+cd ${ROOT}
+
+export PATH="${ROOT}/bin":$PATH
+
+helm lint chart/ksql/.

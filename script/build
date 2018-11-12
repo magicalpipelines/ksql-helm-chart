@@ -1,0 +1,23 @@
+#!/bin/bash
+
+ROOT=`git rev-parse --show-toplevel`
+cd ${ROOT}
+
+VERSION=$(cat VERSION.txt)
+
+# first, build the custom UDFs and UDAFs
+CUSTOM_FUNCTIONS=$(ls functions/)
+mkdir -p functions-out
+
+for fn in $CUSTOM_FUNCTIONS; do
+  echo "Building $fn"
+  cd "functions/$fn"
+  ./gradlew build --no-daemon --rerun-tasks --console plain
+  cp build/libs/${fn}-*.jar ../../functions-out/${fn}.jar
+  cd ..
+  cd ..
+done
+
+# now, build the Docker image. the custom UDFs / UDAFs
+# will be copied into the image
+docker build -t $VERSION .

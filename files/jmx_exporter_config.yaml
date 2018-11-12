@@ -1,0 +1,6 @@
+---
+startDelaySeconds: 0
+ssl: false
+lowercaseOutputName: false
+lowercaseOutputLabelNames: false
+whitelistObjectNames: ["io.confluent.ksql.metrics:*", "kafka.consumer:*", "kafka.producer:*"]

@@ -1,0 +1,87 @@
+{{ range $index, $deployment := .Values.ksqlInstances }}
+---
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: {{ $.Chart.Name }}-{{ $deployment.name }}
+    instance: {{ $.Chart.Name }}-{{ $deployment.name }}
+    alertroute: dsys
+  annotations:
+    doc: {{ $.Values.docURL }}
+    prometheus.io/scrape: "true"
+  name: {{ $.Chart.Name }}-{{ $deployment.name }}
+  namespace: {{ $.Release.Namespace }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ $.Chart.Name }}
+      instance: {{ $.Chart.Name }}
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        doc: {{ $.Values.docURL }}
+        es_index: '{"ksql":"k8s-ksql"}'
+        prometheus.io/scrape: "true"
+        checksum/queries: {{ include (print $.Template.BasePath "/configmap-ksql-queries.yaml") $ | sha256sum }}
+        checksum/loggingconfig: {{ include (print $.Template.BasePath "/configmap-log4j.yaml") $ | sha256sum }}
+      labels:
+        app: {{ $.Chart.Name }}
+        instance: {{ $.Chart.Name }}
+        alertroute: dsys
+    spec:
+      containers:
+        - name: ksql
+          image: {{ $.Values.image }}
+          imagePullPolicy: IfNotPresent
+          args:
+            - ksql-server-start
+            - "/etc/ksql/server.properties"
+          ports:
+          - containerPort: 8080
+            name: metrics
+            protocol: TCP
+          env:
+          - name: "BOOTSTRAP_SERVERS"
+            value: "{{ $deployment.bootstrapServers }}"
+          - name: "QUERIES_FILE"
+            value: "{{ $deployment.queriesFile }}"
+          - name: "KSQL_OPTS"
+            value: "{{ $deployment.ksqlOpts }} -Dksql.extension.dir=/opt/ksql/ext"
+          - name: "RUN_KAFKA_LOCALLY"
+            value: "{{ $deployment.runKafkaLocally }}"
+          - name: "CREATE_TOPIC"
+            value: "{{ $deployment.createDevSourceTopic }}"
+          volumeMounts:
+          - name: queries-config-volume
+            mountPath: /ksql-queries
+          - name: log4j-config-volume
+            mountPath: /etc/ksql/log4j
+          resources:
+            limits:
+              cpu: "{{ $deployment.cpu }}"
+              memory: {{ $deployment.memory }}
+            requests:
+              cpu: "{{ $deployment.cpu }}"
+              memory: {{ $deployment.memory }}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+      volumes:
+        - name: queries-config-volume
+          configMap:
+            name: {{ $.Chart.Name }}-queries
+        - name: log4j-config-volume
+          configMap:
+            name: {{ $.Chart.Name }}-log4j-config
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 600
+      tolerations:
+      - key: CriticalOnly
+        operator: Exists
+{{ end }}

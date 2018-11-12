@@ -1,0 +1,8 @@
+#!/bin/bash
+
+ROOT=`git rev-parse --show-toplevel`
+cd ${ROOT}
+
+VERSION=$(cat VERSION.txt)
+
+helm install --set image=$VERSION --name ksql chart/ksql/.

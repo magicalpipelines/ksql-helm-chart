@@ -1,0 +1,1 @@
+magicalpipelines/ksql:0.1.0
