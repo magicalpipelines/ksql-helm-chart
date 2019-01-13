@@ -5,5 +5,5 @@ ksqlInstances:
       runKafkaLocally: "yes"
       createDevSourceTopic: "api-logs"
       ksqlOpts: "-Dksql.streams.auto.offset.reset=earliest -Dksql.streams.num.stream.threads=4 -Dksql.sink.partitions=4 -Dksql.sink.replicas=1 -Dksql.service.id=dev"
-      cpu: 2
+      cpu: 1
       memory: 1Gi
