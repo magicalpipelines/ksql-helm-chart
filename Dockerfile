@@ -1,4 +1,4 @@
-FROM magicalpipelines/centos-7-confluent-platform:5.0.0
+FROM magicalpipelines/centos-7-confluent-platform:5.0.1
 
 ADD docker-entrypoint.sh /docker-entrypoint.sh
 
@@ -19,6 +19,14 @@ ARG LOG4J_JSONEVENT_LAYOUT_VERSION=1.7
 ADD http://repo1.maven.org/maven2/net/logstash/log4j/jsonevent-layout/1.7/jsonevent-layout-$LOG4J_JSONEVENT_LAYOUT_VERSION.jar /opt/confluent-$CONFLUENT_VERSION/share/java/confluent-common/
 
 EXPOSE 8080
+
+# Graalvm
+RUN mkdir -p /usr/local/bin/graalvm
+RUN curl -s -L https://github.com/oracle/graal/releases/download/vm-1.0.0-rc10/graalvm-ce-1.0.0-rc10-linux-amd64.tar.gz | tar zvx -C /usr/local/bin/graalvm --strip-components 1
+ENV JAVA_HOME=/usr/local/bin/graalvm
+ENV PATH="${JAVA_HOME}/bin/:${PATH}"
+
+ENV BOOTSTRAP_SERVERS=localhost:9092
 
 # If no command is specified when running this container, just drop the user
 # in a bash shell
