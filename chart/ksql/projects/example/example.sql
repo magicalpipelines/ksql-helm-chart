@@ -1,4 +1,4 @@
-/** Raw tweets, e.g. from the Twitter connector **/
+-- Raw tweets, e.g. from the Twitter connector
 CREATE STREAM tweets (
   CreatedAt BIGINT,
   Id BIGINT,
@@ -9,7 +9,7 @@ CREATE STREAM tweets (
 )
 WITH (kafka_topic='tweets', value_format='JSON');
 
-/** Restructure the original data. **/
+-- Restructure the original data
 CREATE STREAM tweets_formatted
 WITH (kafka_topic='tweets-formatted') AS
 SELECT
@@ -27,7 +27,7 @@ SELECT
   User->FriendsCount as user_friends_count
 FROM tweets ;
 
-/** Filter the above stream and create a new stream related to billing issues **/
+-- Filter the above stream and create a new stream related to billing issues
 CREATE STREAM tweets_billing
 WITH (kafka_topic='tweets-billing') AS
 SELECT
