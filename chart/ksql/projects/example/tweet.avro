@@ -37,8 +37,8 @@
             "Let's have our Billing team take a closer look",
             "Our Billing team can help you out, let's get them involved",
             "Our Support team can help with that",
-            "Sorry to hear that. Our API team is happy to help. Could you send an email to apihelp [at] mailchimp [dot] com?",
-            "Our Compliance team can help look into this. Please send an email to compliance [at] mailchimp [dot] com",
+            "Sorry to hear that. Our API team is happy to help. Could you send an email to apihelp [at] magicalpipelines [dot] com?",
+            "Our Compliance team can help look into this. Please send an email to compliance [at] magicalpipelines [dot] com",
             "Let's have our Legal team take a closer look"
           ]
         }
@@ -62,10 +62,10 @@
           "options": [
             {
               "Id": "14377870",
-              "Name": "Mailchimp",
-              "Description": "Make big moves with the smarter all-in-one Marketing Platform built for growing businesses. For updates about our service, check out @MailchimpStatus.",
-              "ScreenName": "Mailchimp",
-              "URL": "http://www.mailchimp.com",
+              "Name": "MagicalPipelines",
+              "Description": "Make big moves with the smarter all-in-one Marketing Platform built for growing businesses. For updates about our service, check out @MagicalPipelinesStatus.",
+              "ScreenName": "MagicalPipelines",
+              "URL": "http://www.magicalpipelines.com",
               "FollowersCount": "248247",
               "FriendsCount": "16417"
             }
