@@ -1,0 +1,77 @@
+{
+  "namespace": "streams",
+  "name": "tweet",
+  "type": "record",
+  "fields": [
+    {
+      "name": "CreatedAt",
+      "type": {
+        "type": "long",
+        "format_as_time": "unix_long",
+        "arg.properties": {
+          "iteration": {
+            "start": 1,
+            "step": 10
+          }
+        }
+      }
+    },
+    {
+      "name": "Id",
+      "type": {
+        "type": "long",
+        "arg.properties": {
+          "iteration": {
+            "start": 10000,
+            "step": 5
+          }
+        }
+      }
+    },
+    {
+      "name": "Text",
+      "type": {
+        "type": "string",
+        "arg.properties": {
+          "options": [
+            "Let's have our Billing team take a closer look",
+            "Our Billing team can help you out, let's get them involved",
+            "Our Support team can help with that",
+            "Sorry to hear that. Our API team is happy to help. Could you send an email to apihelp [at] mailchimp [dot] com?",
+            "Our Compliance team can help look into this. Please send an email to compliance [at] mailchimp [dot] com",
+            "Let's have our Legal team take a closer look"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Source",
+      "type": {
+        "type": "string",
+        "arg.properties": {
+          "regex": ""
+        }
+      }
+    },
+    {
+      "name": "User",
+      "type": {
+        "type": "map",
+        "values": "string",
+        "arg.properties": {
+          "options": [
+            {
+              "Id": "14377870",
+              "Name": "Mailchimp",
+              "Description": "Make big moves with the smarter all-in-one Marketing Platform built for growing businesses. For updates about our service, check out @MailchimpStatus.",
+              "ScreenName": "Mailchimp",
+              "URL": "http://www.mailchimp.com",
+              "FollowersCount": "248247",
+              "FriendsCount": "16417"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

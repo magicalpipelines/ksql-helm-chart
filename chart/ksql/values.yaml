@@ -1,9 +1,9 @@
 docUrl: http://mitchseymour.com
-ksqlInstances:
-    - name: cli
-      bootstrapServers: "localhost:9092"
-      runKafkaLocally: "yes"
-      createDevSourceTopic: "api-logs"
-      ksqlOpts: "-Dksql.streams.auto.offset.reset=earliest -Dksql.streams.num.stream.threads=4 -Dksql.sink.partitions=4 -Dksql.sink.replicas=1 -Dksql.service.id=dev"
+
+deployments:
+    - name: "example"
+      initScript: "init.sh"
+      ksqlConfig: "ksql.properties"
+      ksqlOpts: []
       cpu: 2
       memory: 1Gi
