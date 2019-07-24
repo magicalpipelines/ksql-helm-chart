@@ -19,7 +19,7 @@ fi
 #
 # Note: We do not run this as a separate pod in a local env since KSQL can't make sense
 # of the other pod's hostname (even though it's reachable from the KSQL pod)
-[ -n "$RUN_KAFKA_LOCALLY" ] && echo "Running local instance of Kafka" && confluent start kafka
+[ -n "$RUN_KAFKA_LOCALLY" ] && echo "Running local instance of Kafka" && confluent local start kafka
 [ -n "$CREATE_TOPIC" ] && kafka-topics --zookeeper localhost:2181 --create --topic $CREATE_TOPIC --partitions 4 --replication-factor 1
 
 # Only export the JMX_PORT after Kafka has been (optionally) started. Otherwise, there will be port conflicts
