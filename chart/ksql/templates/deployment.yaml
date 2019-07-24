@@ -14,7 +14,7 @@ metadata:
   name: {{ $.Chart.Name }}-{{ $deployment.name }}
   namespace: {{ $.Release.Namespace }}
 spec:
-  replicas: 1
+  replicas: {{ $deployment.replicas | default 1 }}
   selector:
     matchLabels:
       app: {{ $.Chart.Name }}-{{ $deployment.name }}
