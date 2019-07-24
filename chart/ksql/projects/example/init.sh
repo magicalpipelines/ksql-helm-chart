@@ -10,6 +10,6 @@ do
    kafka-topics --zookeeper=localhost:2181 --create --topic "$i" --partitions 4 --replication-factor 1
 done
 
-# throw some dummy data into the tweets topic
-# echo "Writing data to tweets topic"
-# kafka-console-producer --broker-list localhost:9092 --topic tweets < /etc/ksql/project/twitter.json
+# use the data generator
+echo "generating dummy data in the background"
+ksql-datagen schema=tweet.avro format=json topic=tweets key=Id maxInterval=5000 iterations=100 &>/dev/null &
