@@ -1,0 +1,17 @@
+{{ range $index, $deployment := .Values.deployments }}
+{{ $projectDir := printf "projects/%s/*" $deployment.name }}
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ $.Chart.Name }}-{{ $deployment.name }}
+  namespace: {{ $.Release.Namespace }}
+  labels:
+    app: {{ $.Chart.Name }}-{{ $deployment.name }}
+    instance: {{ $.Chart.Name }}-{{ $deployment.name }}
+    project: {{ $deployment.name }}
+  annotations:
+    doc: {{ $.Values.docURL }}
+data:
+{{ ($.Files.Glob $projectDir).AsConfig | indent 2 }}
+{{ end }}
