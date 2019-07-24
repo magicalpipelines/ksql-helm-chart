@@ -11,5 +11,5 @@ do
 done
 
 # throw some dummy data into the tweets topic
-echo "Writing data to tweets topic"
-kafka-console-producer --broker-list localhost:9092 --topic tweets < /etc/ksql/project/twitter.json
+# echo "Writing data to tweets topic"
+# kafka-console-producer --broker-list localhost:9092 --topic tweets < /etc/ksql/project/twitter.json
