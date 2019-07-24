@@ -1,4 +1,4 @@
-FROM magicalpipelines/centos-7-confluent-platform:5.0.0
+FROM magicalpipelines/centos-7-confluent-platform:5.3.0
 
 ADD docker-entrypoint.sh /docker-entrypoint.sh
 
