@@ -87,7 +87,7 @@ ON p.user_id = u.user_id
 LIMIT 3;
 */
 -- Reformat to JSON
-CREATE STREAM purchases_reformatted
+CREATE STREAM purchases_formatted
 WITH (
   kafka_topic='purchases',
   value_format='avro'
@@ -102,8 +102,8 @@ SELECT
 FROM all_purchases p
 LEFT JOIN users u
 ON p.user_id = u.user_id;
--- DESCRIBE purchases_reformatted ;
--- SELECT * FROM purchases_reformatted ;
+-- DESCRIBE purchases_formatted ;
+-- SELECT * FROM purchases_formatted ;
 
 -- Demonstrate windowing to catch suspicious transactions
 CREATE TABLE suspicious_transactions
@@ -115,7 +115,7 @@ SELECT
   p.user_id,
   p.masked_credit_card,
   COUNT() as total_purchases
-FROM purchases_reformatted p
+FROM purchases_formatted p
 WINDOW TUMBLING (SIZE 10 SECONDS)
 GROUP BY
   p.user_id,
