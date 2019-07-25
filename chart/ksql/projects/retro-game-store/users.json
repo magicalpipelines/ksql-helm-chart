@@ -1,0 +1,5 @@
+user_1000:{"user_id":"user_1000","first_name":"Arnold","last_name":"Jones","email":"arnold@example.com","address":{"street": "123 Arnold Ln", "city": "Atlanta", "state": "GA", "zip": "30308"}}
+user_2000:{"user_id":"user_2000","first_name":"Isabelle","last_name":"Seymour","email":"izzy@example.com","address":{"street": "123 Izzy St", "city": "Atlanta", "state": "GA", "zip": "30308"}}
+user_3000:{"user_id":"user_3000","first_name":"Elyse","last_name":"Conde","email":"elyse@example.com","address":{"street": "123 Elyse Circle", "city": "Atlanta", "state": "GA", "zip": "30308"}}
+user_4000:{"user_id":"user_4000","first_name":"Mark","last_name":"Smith","email":"mark@example.com","address":{"street": "123 Mark Dr", "city": "Atlanta", "state": "GA", "zip": "30308"}}
+user_5000:{"user_id":"user_5000","first_name":"Laura","last_name":"Jones","email":"laura@example.com","address":{"street": "123 Laura Ln", "city": "Atlanta", "state": "GA", "zip": "30308"}}
