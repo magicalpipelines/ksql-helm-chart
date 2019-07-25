@@ -1,9 +1,9 @@
 docUrl: http://mitchseymour.com
 
 deployments:
-    - name: "example"
+    - name: "retro-game-store"
       initScript: "init.sh"
       ksqlConfig: "ksql.properties"
       ksqlOpts: []
       cpu: 2
-      memory: 1Gi
+      memory: 2Gi

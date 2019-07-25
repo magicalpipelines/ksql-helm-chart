@@ -1,0 +1,77 @@
+{
+  "namespace": "streams",
+  "name": "game_purchase",
+  "type": "record",
+  "fields": [
+    {
+      "name": "user_id",
+      "type": {
+        "type": "string",
+        "arg.properties": {
+          "options": [
+            "user_1000",
+            "user_2000",
+            "user_3000",
+            "user_4000",
+            "user_5000"
+          ]
+        }
+      }
+    },
+    {
+      "name": "purchase_id",
+      "type": {
+        "type": "string",
+        "arg.properties": {
+          "regex": "purchase_[1-9][0-9]"
+        }
+      }
+    },
+    {
+      "name": "purchase_time",
+      "type": {
+        "type": "long",
+        "format_as_time" : "unix_long",
+        "arg.properties": {
+          "iteration": {
+            "start": 1,
+            "step": 10
+          }
+        }
+      }
+    },
+    {
+      "name": "product",
+      "type": {
+        "type": "string",
+        "arg.properties": {
+          "options": [
+            "Goldeneye 007",
+            "Starfox 64",
+            "Perfect Dark",
+            "Wave Race",
+            "Diddy Kong Racing"
+          ]
+        }
+      }
+    },
+    {
+      "name": "product_type",
+      "type": {
+        "type": "string",
+        "arg.properties": {
+          "regex": "game"
+        }
+      }
+    },
+    {
+      "name": "credit_card",
+      "type": {
+        "type": "string",
+        "arg.properties": {
+          "regex": "[1-9]{4}-[1-9]{4}-[1-9]{4}-[1-9]{4}"
+        }
+      }
+    }
+  ]
+}
