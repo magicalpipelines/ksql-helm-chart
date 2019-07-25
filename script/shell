@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+NAMESPACE=default
+KSQL_POD=$(kubectl get pods -n $NAMESPACE -l instance=ksql-$1 -o jsonpath="{.items[0].metadata.name}")
+
+kubectl exec -ti $KSQL_POD bash
